@@ -13,27 +13,41 @@ const Layout = ({ children, title = 'This is the default title' }: Props) => (
       <title>{title}</title>
       <meta charSet="utf-8" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css"></link>
     </Head>
     <header>
-      <nav>
+      <nav className="navbar navbar-brand" role="navigation" aria-label="main navigation">
         <Link href="/">
-          <a>Home</a>
+          <a className="navbar-item">Home</a>
         </Link>{' '}
-        |{' '}
+        {' '}
         <Link href="/about">
-          <a>About</a>
+          <a className="navbar-item">About</a>
         </Link>{' '}
-        |{' '}
+        {' '}
         <Link href="/users">
-          <a>Users List</a>
+          <a className="navbar-item">Users List</a>
         </Link>{' '}
-        | <a href="/api/users">Users API</a>
+         <a href="/api/users" className="navbar-item">Users API</a>
+
+        <div className="navbar-end">
+          <div className="navbar-item">
+            <div className="buttons">
+              <a className="button is-primary">
+                <strong>Sign up</strong>
+              </a>
+              <a className="button is-light">
+                Log in
+              </a>
+            </div>
+          </div>
+        </div>
       </nav>
     </header>
     {children}
-    <footer>
+    <footer className="content has-text-centered">
       <hr />
-      <span>I'm here to stay (Footer)</span>
+      <span>© {new Date().getFullYear()} Yuki Ikegaya</span>
     </footer>
   </div>
 )

@@ -18,13 +18,19 @@ const Trend = () => {
   }, []);
 
   return (
-    <ul>
-    {trendMovies.map((movie, i) => (
-      <li key={i}>
-        {movie.original_title}
-      </li>
-    ))}
-  </ul>
+    <div className="columns is-vcentered">
+      {trendMovies.slice(1, 9).map((movie, i) => (
+        <div key={i}>
+          <div className="column">
+            <img src={"https://image.tmdb.org/t/p/w500/" + movie.poster_path}></img>
+            <div>{movie.original_title}</div>
+          </div>
+          <br/>
+        </div>
+      ))}
+    <style jsx>{`
+    `}</style>
+    </div>
   )
 }
 
