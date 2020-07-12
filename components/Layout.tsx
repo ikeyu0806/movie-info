@@ -33,7 +33,7 @@ const Layout = ({ children, title = 'This is the default title' }: Props) => (
         <div className="navbar-end">
           <div className="navbar-item">
             <div className="buttons">
-              <a className="button is-primary">
+              <a className="button is-primary" href="/signup">
                 <strong>Sign up</strong>
               </a>
               <a className="button is-light">
