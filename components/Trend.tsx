@@ -28,8 +28,6 @@ const Trend = () => {
           <br/>
         </div>
       ))}
-    <style jsx>{`
-    `}</style>
     </div>
   )
 }

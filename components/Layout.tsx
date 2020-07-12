@@ -16,7 +16,7 @@ const Layout = ({ children, title = 'This is the default title' }: Props) => (
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css"></link>
     </Head>
     <header>
-      <nav className="navbar navbar-brand" role="navigation" aria-label="main navigation">
+      <nav className="navbar is-warning" role="navigation" aria-label="main navigation">
         <Link href="/">
           <a className="navbar-item">Home</a>
         </Link>{' '}
