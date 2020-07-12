@@ -2,7 +2,7 @@ import * as React from 'react'
 import { useState, useEffect } from "react"
 import axios from 'axios'
 
-import { TrendMovie } from '../interfaces/trend_movie'
+import { TrendMovie } from '../interfaces/TrendMovie'
 
 const Trend = () => {
   const [trendMovies, setTrendMovies] = useState<TrendMovie[]>([]);
