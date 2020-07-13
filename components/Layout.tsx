@@ -18,26 +18,26 @@ const Layout = ({ children, title = 'This is the default title' }: Props) => (
     <header>
       <nav className="navbar is-warning" role="navigation" aria-label="main navigation">
         <Link href="/">
-          <a className="navbar-item">Home</a>
+          <a className="navbar-item">Top</a>
         </Link>{' '}
         {' '}
         <Link href="/about">
-          <a className="navbar-item">About</a>
+          <a className="navbar-item">My Page</a>
         </Link>{' '}
         {' '}
         <Link href="/users">
-          <a className="navbar-item">Users List</a>
+          <a className="navbar-item">Search</a>
         </Link>{' '}
-         <a href="/api/users" className="navbar-item">Users API</a>
+         <a href="/api/users" className="navbar-item">News</a>
 
         <div className="navbar-end">
           <div className="navbar-item">
             <div className="buttons">
               <a className="button is-primary" href="/signup">
-                <strong>Sign up</strong>
+                <strong>ユーザ登録</strong>
               </a>
               <a className="button is-light">
-                Log in
+                ログイン
               </a>
             </div>
           </div>

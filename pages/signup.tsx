@@ -22,7 +22,7 @@ const SignUp = () => {
   }
 
   const ExecSignUp = () => {
-    axios.post('http://localhost:8000/signup', params), {
+    axios.post('http://localhost:3002/signup', params), {
       headers: {
         'Content-Type': 'application/json'
       }
