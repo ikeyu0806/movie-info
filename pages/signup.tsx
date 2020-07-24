@@ -22,11 +22,17 @@ const SignUp = () => {
   }
 
   const ExecSignUp = () => {
-    axios.post('http://localhost:3002/signup', params), {
+    axios.post('http://localhost:3002/signup', {
       headers: {
         'Content-Type': 'application/json'
-      }
-    };
+      }, params
+    })
+    .then((response) => {
+      localStorage.setItem('jwt_token', response.data.token)
+    })
+    .catch((error) => {
+      console.log(error)
+    })
   }
   return (
     <>
