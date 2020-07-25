@@ -4,7 +4,7 @@ import { useState, createContext } from "react"
 import Layout from '../components/Layout'
 import { User, CurrentUser } from '../interfaces/User'
 
-export const SignupUserContext = createContext<CurrentUser>({id: 0, token: "", name: "", email: ""})
+export const CurrentUserContext = createContext<CurrentUser>({id: 0, token: "", name: "", email: ""})
 
 const SignUp = () => {
   const [name, setName] = useState<string>("")
@@ -30,7 +30,7 @@ const SignUp = () => {
     })
   }
   return (
-    <SignupUserContext.Provider value={currentUser}>
+    <CurrentUserContext.Provider value={currentUser}>
       <Layout title="映画情報サービス">
         <div className="authentication-form">
           <div className="field">
@@ -112,7 +112,7 @@ const SignUp = () => {
           }
         `}</style>
       </Layout>
-    </SignupUserContext.Provider>
+    </CurrentUserContext.Provider>
   )
 }
 
