@@ -52,8 +52,8 @@ const Layout = ({ children, title = 'This is the default title' }: Props) => {
                   <a className="button is-primary" href="/signup">
                     <strong>ユーザ登録</strong>
                   </a>
-                  <a className="button is-light">
-                    ログイン
+                  <a className="button is-light" href="/login">
+                  <strong>ログイン</strong>
                   </a>
                 </div>
               }
