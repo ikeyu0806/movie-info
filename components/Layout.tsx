@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react'
-import { useContext } from "react"
-import { CurrentUserContext } from '../pages/signup'
+import { useEffect, useState, useContext } from "react"
+import { SignupUserContext } from '../pages/signup'
+import { CurrentUser } from '../interfaces/User'
 import Link from 'next/link'
 import Head from 'next/head'
 
@@ -10,7 +11,15 @@ type Props = {
 }
 
 const Layout = ({ children, title = 'This is the default title' }: Props) => {
-  const currentUser = useContext(CurrentUserContext);
+  const [currentUser, setCurrentUser] = useState<CurrentUser>({id: 0, token: "", name: "", email: ""});
+
+  useEffect(() => {
+    const currentUserInfo = localStorage.getItem('current_user');
+    if (currentUserInfo) {
+      setCurrentUser(JSON.parse(currentUserInfo));
+    }
+  }, []);
+  const signupUser = useContext(SignupUserContext);
   return (
     <>
       <Head>
@@ -36,8 +45,8 @@ const Layout = ({ children, title = 'This is the default title' }: Props) => {
 
           <div className="navbar-end">
             <div className="navbar-item">
-              {currentUser.name
-                ? <div>{currentUser.name}でログイン中です</div>
+              {currentUser.name || signupUser.name
+                ? <div>{currentUser.name ? currentUser.name : signupUser.name}でログイン中です</div>
                 :              
                 <div className="buttons">
                   <a className="button is-primary" href="/signup">
