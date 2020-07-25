@@ -2,20 +2,15 @@ import * as React from 'react'
 import axios from 'axios'
 import { useState } from "react"
 import Layout from '../components/Layout'
-
-interface User {
-  name: string
-  email: string
-  password: string
-}
+import { User, CurrentUser } from '../interfaces/User'
 
 const SignUp = () => {
-  const [name, setName] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
-  const [password1, setPassword1] = useState<string>("");
-  const [password2, setPassword2] = useState<string>("");
-  const [user, setUser] = useState<User>({name: "", email: "", password: ""});
-  const CurrentUserContext = React.createContext<User>({name: "", email: "", password: ""});
+  const [name, setName] = useState<string>("")
+  const [email, setEmail] = useState<string>("")
+  const [password1, setPassword1] = useState<string>("")
+  const [password2, setPassword2] = useState<string>("")
+  const [currentUser, setCurrentUser] = useState<CurrentUser>({name: "", email: ""})
+  const CurrentUserContext = React.createContext<CurrentUser>({name: "", email: ""})
 
   const params: User = {
     name: name,
@@ -30,10 +25,7 @@ const SignUp = () => {
       }, params
     })
     .then((response) => {
-      console.log(response.data)
-      setUser({name: name, email: email, password: ""})
-      console.log(user)
-      console.log(name)
+      setCurrentUser({name: name, email: email})
       localStorage.setItem('jwt_token', response.data.token)
     })
     .catch((error) => {
@@ -41,7 +33,7 @@ const SignUp = () => {
     })
   }
   return (
-    <CurrentUserContext.Provider value={user}>
+    <CurrentUserContext.Provider value={currentUser}>
       <Layout title="映画情報サービス">
         <div className="authentication-form">
           <div className="field">

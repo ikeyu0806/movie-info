@@ -1,7 +1,6 @@
 import Layout from '../components/Layout'
 import Trend from '../components/Trend'
 
-
 const IndexPage = () => (
 
   <Layout title="映画情報サービス">
