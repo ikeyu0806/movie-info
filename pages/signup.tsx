@@ -4,13 +4,14 @@ import { useState } from "react"
 import Layout from '../components/Layout'
 import { User, CurrentUser } from '../interfaces/User'
 
+const CurrentUserContext = React.createContext<CurrentUser>({name: "", email: ""})
+
 const SignUp = () => {
   const [name, setName] = useState<string>("")
   const [email, setEmail] = useState<string>("")
   const [password1, setPassword1] = useState<string>("")
   const [password2, setPassword2] = useState<string>("")
   const [currentUser, setCurrentUser] = useState<CurrentUser>({name: "", email: ""})
-  const CurrentUserContext = React.createContext<CurrentUser>({name: "", email: ""})
 
   const params: User = {
     name: name,
