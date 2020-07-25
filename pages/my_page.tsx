@@ -13,22 +13,44 @@ const MyPage = () => {
     }
   }, []);
 
+  const ExecLogOut = () => {
+    localStorage.removeItem('current_user')
+    setCurrentUser({id: 0, token: "", name: "", email: ""})
+  }
+
   return (
-    <Layout title="MY Page">  
-      <h1>MyPage</h1>
-      {currentUser.name
-        ?
-          <div>
-            <p>This is the about page</p> 
-            <a className="button is-danger">
-              ログアウト
-            </a>
-          </div>
-        : 
-          <p>ログインしてください</p>}
-        <Link href="/">
-          <a>ホームに戻る</a>
-        </Link>
+    <Layout title="MY Page">
+      <div className="my-page">
+        <h1>マイページ</h1>
+        {currentUser.name
+          ?
+            <div>
+              <p>名前: {currentUser.name}</p> 
+              <a id="logout-btn" className="button is-danger" onClick={ExecLogOut}>
+                ログアウト
+              </a>
+            </div>
+          : 
+            <p>ログインしてください</p>}
+          <Link href="/">
+            <a>ホームに戻る</a>
+          </Link>
+      </div>
+      <style jsx>{`
+        h1 {
+          font-size: 150%;
+          font-weight: bold;
+          margin-bottom: 20px;
+        }
+        .my-page {
+          text-align: center;
+          margin-top: 40px;
+        }
+        #logout-btn {
+          margin-top: 20px;
+          margin-bottom: 20px;
+        }
+      `}</style>
     </Layout>
   )
 }
