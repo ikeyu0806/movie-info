@@ -1,10 +1,10 @@
 import * as React from 'react'
 import axios from 'axios'
-import { useState } from "react"
+import { useState, createContext } from "react"
 import Layout from '../components/Layout'
 import { User, CurrentUser } from '../interfaces/User'
 
-const CurrentUserContext = React.createContext<CurrentUser>({name: "", email: ""})
+export const CurrentUserContext = createContext<CurrentUser>({name: "", email: ""})
 
 const SignUp = () => {
   const [name, setName] = useState<string>("")
