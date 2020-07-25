@@ -30,7 +30,12 @@ const SignUp = () => {
     })
   }
   return (
+
     <CurrentUserContext.Provider value={currentUser}>
+      {currentUser.token
+      ?
+        <p>ログインしています</p>
+      :
       <Layout title="映画情報サービス">
         <div className="authentication-form">
           <div className="field">
@@ -112,7 +117,8 @@ const SignUp = () => {
           }
         `}</style>
       </Layout>
-    </CurrentUserContext.Provider>
+    }
+  </CurrentUserContext.Provider>
   )
 }
 
