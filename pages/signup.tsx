@@ -19,11 +19,7 @@ const SignUp = () => {
   }
 
   const ExecSignUp = () => {
-    axios.post('http://localhost:3002/signup', {
-      headers: {
-        'Content-Type': 'application/json'
-      }, params
-    })
+    axios.post('http://localhost:3002/signup', params)
     .then((response) => {
       setCurrentUser({name: name, email: email})
       localStorage.setItem('jwt_token', response.data.token)
