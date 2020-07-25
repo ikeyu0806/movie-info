@@ -34,7 +34,7 @@ const Layout = ({ children, title = 'This is the default title' }: Props) => {
             <a className="navbar-item">Top</a>
           </Link>{' '}
           {' '}
-          <Link href="/about">
+          <Link href="/my_page">
             <a className="navbar-item">My Page</a>
           </Link>{' '}
           {' '}
