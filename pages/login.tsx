@@ -6,7 +6,7 @@ import { User, CurrentUser } from '../interfaces/User'
 
 export const CurrentUserContext = createContext<CurrentUser>({id: 0, token: "", name: "", email: ""})
 
-const SignUp = () => {
+const Login = () => {
   const [name, setName] = useState<string>("")
   const [email, setEmail] = useState<string>("")
   const [password1, setPassword1] = useState<string>("")
@@ -19,8 +19,8 @@ const SignUp = () => {
     password: password1
   }
 
-  const ExecSignUp = () => {
-    axios.post('http://localhost:3002/signup', params)
+  const ExecLogin = () => {
+    axios.post('http://localhost:3002/login', params)
     .then((response) => {
       setCurrentUser({id: 0, token: response.data.token, name: name, email: email})
       localStorage.setItem('current_user',JSON.stringify({id: 0, token: response.data.token, name: name, email: email}))
@@ -95,7 +95,7 @@ const SignUp = () => {
 
           <div className="field is-grouped confirm-buttons">
             <div className="control">
-              <button className="button is-link" onClick={ExecSignUp}>送信</button>
+              <button className="button is-link" onClick={ExecLogin}>送信</button>
             </div>
             <div className="control">
               <button className="button is-link is-light">キャンセル</button>
@@ -122,4 +122,4 @@ const SignUp = () => {
   )
 }
 
-export default SignUp
+export default Login
