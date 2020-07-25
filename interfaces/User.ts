@@ -5,6 +5,8 @@ export interface User {
 }
 
 export interface CurrentUser {
+  id: number
+  token: string
   name: string
   email: string
 }

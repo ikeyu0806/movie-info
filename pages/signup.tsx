@@ -4,14 +4,14 @@ import { useState, createContext } from "react"
 import Layout from '../components/Layout'
 import { User, CurrentUser } from '../interfaces/User'
 
-export const CurrentUserContext = createContext<CurrentUser>({name: "", email: ""})
+export const CurrentUserContext = createContext<CurrentUser>({id: 0, token: "", name: "", email: ""})
 
 const SignUp = () => {
   const [name, setName] = useState<string>("")
   const [email, setEmail] = useState<string>("")
   const [password1, setPassword1] = useState<string>("")
   const [password2, setPassword2] = useState<string>("")
-  const [currentUser, setCurrentUser] = useState<CurrentUser>({name: "", email: ""})
+  const [currentUser, setCurrentUser] = useState<CurrentUser>({id: 0, token: "", name: "", email: ""})
 
   const params: User = {
     name: name,
@@ -22,8 +22,8 @@ const SignUp = () => {
   const ExecSignUp = () => {
     axios.post('http://localhost:3002/signup', params)
     .then((response) => {
-      setCurrentUser({name: name, email: email})
-      localStorage.setItem('jwt_token', response.data.token)
+      setCurrentUser({id: 0, token: response.data.token, name: name, email: email})
+      localStorage.setItem('current_user',JSON.stringify({id: 0, token: response.data.token, name: name, email: email}))
     })
     .catch((error) => {
       console.log(error)
