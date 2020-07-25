@@ -1,19 +1,17 @@
 import * as React from 'react'
 import axios from 'axios'
-import { useState } from "react"
+import { useState, createContext } from "react"
 import Layout from '../components/Layout'
+import { User, CurrentUser } from '../interfaces/User'
 
-interface User {
-  name: string
-  email: string
-  password: string
-}
+export const SignupUserContext = createContext<CurrentUser>({id: 0, token: "", name: "", email: ""})
 
 const SignUp = () => {
-  const [name, setName] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
-  const [password1, setPassword1] = useState<string>("");
-  const [password2, setPassword2] = useState<string>("");
+  const [name, setName] = useState<string>("")
+  const [email, setEmail] = useState<string>("")
+  const [password1, setPassword1] = useState<string>("")
+  const [password2, setPassword2] = useState<string>("")
+  const [currentUser, setCurrentUser] = useState<CurrentUser>({id: 0, token: "", name: "", email: ""})
 
   const params: User = {
     name: name,
@@ -22,14 +20,17 @@ const SignUp = () => {
   }
 
   const ExecSignUp = () => {
-    axios.post('http://localhost:3002/signup', params), {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    };
+    axios.post('http://localhost:3002/signup', params)
+    .then((response) => {
+      setCurrentUser({id: 0, token: response.data.token, name: name, email: email})
+      localStorage.setItem('current_user',JSON.stringify({id: 0, token: response.data.token, name: name, email: email}))
+    })
+    .catch((error) => {
+      console.log(error)
+    })
   }
   return (
-    <>
+    <SignupUserContext.Provider value={currentUser}>
       <Layout title="映画情報サービス">
         <div className="authentication-form">
           <div className="field">
@@ -120,7 +121,7 @@ const SignUp = () => {
           }
         `}</style>
       </Layout>
-    </>
+    </SignupUserContext.Provider>
   )
 }
 

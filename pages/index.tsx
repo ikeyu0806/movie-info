@@ -1,7 +1,5 @@
-import Link from 'next/link'
 import Layout from '../components/Layout'
 import Trend from '../components/Trend'
-
 
 const IndexPage = () => (
 
