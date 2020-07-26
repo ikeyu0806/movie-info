@@ -8,22 +8,18 @@ export const CurrentUserContext = createContext<CurrentUser>({id: 0, token: "", 
 
 const Login = () => {
   const [name, setName] = useState<string>("")
-  const [email, setEmail] = useState<string>("")
   const [password1, setPassword1] = useState<string>("")
-  const [password2, setPassword2] = useState<string>("")
   const [currentUser, setCurrentUser] = useState<CurrentUser>({id: 0, token: "", name: "", email: ""})
 
   const params = new URLSearchParams();
   params.append('name', name)
-  params.append('email', email)
   params.append('password', password1)
 
   const ExecLogin = () => {
     axios.post('http://localhost:3002/login', params)
     .then((response) => {
-      console.log(response.data)
-      setCurrentUser({id: 0, token: response.data.token, name: name, email: email})
-      localStorage.setItem('current_user',JSON.stringify({id: 0, token: response.data.token, name: name, email: email}))
+      setCurrentUser({id: 0, token: response.data.token, name: name, email: response.data.user.email})
+      localStorage.setItem('current_user',JSON.stringify({id: 0, token: response.data.token, name: name}))
     })
     .catch((error) => {
       console.log(error)
@@ -32,11 +28,21 @@ const Login = () => {
   return (
 
     <CurrentUserContext.Provider value={currentUser}>
+      <Layout title="映画情報サービス">
       {currentUser.token
       ?
+      <>
         <p>ログインしています</p>
+        <style jsx>{`
+        p {
+          margin-top: 30px;
+          display: grid;
+          place-items: center;
+        }
+        `}</style>
+      </>
       :
-      <Layout title="映画情報サービス">
+      <>
         <div className="authentication-form">
           <div className="field">
             <h1>ログイン</h1>
@@ -55,35 +61,9 @@ const Login = () => {
           </div>
 
           <div className="field">
-            <label className="label">メールアドレス</label>
-            <div className="control has-icons-left has-icons-right">
-              <input className="input" type="email" placeholder="メールアドレス" onChange={(e) => { setEmail(e.target.value)}} value={email}></input>
-              <span className="icon is-small is-left">
-                <i className="fas fa-envelope"></i>
-              </span>
-              <span className="icon is-small is-right">
-                <i className="fas fa-exclamation-triangle"></i>
-              </span>
-            </div>
-          </div>
-
-          <div className="field">
             <label className="label">パスワード</label>
             <div className="control has-icons-left has-icons-right">
               <input className="input" type="password1" placeholder="パスワード" onChange={(e) => { setPassword1(e.target.value)}} value={password1}></input>
-              <span className="icon is-small is-left">
-                <i className="fas fa-envelope"></i>
-              </span>
-              <span className="icon is-small is-right">
-                <i className="fas fa-exclamation-triangle"></i>
-              </span>
-            </div>
-          </div>
-
-          <div className="field">
-            <label className="label">パスワード（確認）</label>
-            <div className="control has-icons-left has-icons-right">
-              <input className="input" type="password2" placeholder="パスワード（確認）" onChange={(e) => { setPassword2(e.target.value)}} value={password2}></input>
               <span className="icon is-small is-left">
                 <i className="fas fa-envelope"></i>
               </span>
@@ -116,8 +96,9 @@ const Login = () => {
             margin-top: 20px;
           }
         `}</style>
-      </Layout>
+      </>
     }
+    </Layout>
   </CurrentUserContext.Provider>
   )
 }
