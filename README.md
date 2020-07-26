@@ -11,3 +11,5 @@ https://www.themoviedb.org/?language=ja
 
 ## Author
 Yuki Ikegaya
+
+<img width="1330" alt="スクリーンショット 2020-07-26 19 30 39" src="https://user-images.githubusercontent.com/30525452/88476879-bcde5780-cf76-11ea-85b5-46c5e7420d07.png">
