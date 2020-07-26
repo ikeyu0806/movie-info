@@ -34,13 +34,35 @@ const MovieDetail = () => {
   }, []);
   return (
     <Layout title="映画情報サービス">
-      <p>{movie.title}</p>
-      <img src={"https://image.tmdb.org/t/p/w500/" + movie.poster_path}></img>
-      <img src={"https://image.tmdb.org/t/p/w500/" + movie.backdrop_path}></img>
-      <p>{movie.overview}</p>
-      <p>{movie.homepage}</p>
-      <p>{movie.vote_average}</p>
-      <p>{movie.vote_count}</p>
+      <div id="movie-detail">
+        <h1>{movie.title}</h1>
+        <img src={"https://image.tmdb.org/t/p/w500/" + movie.poster_path} id="poster"></img>
+        <img src={"https://image.tmdb.org/t/p/w500/" + movie.backdrop_path} id="backdrop"></img>
+        <p>{movie.overview}</p>
+        <p>{movie.homepage}</p>
+        <p>{movie.vote_average}</p>
+        <p>{movie.vote_count}</p>
+      </div>
+      <style jsx>{`
+        h1 {
+          text-align: center;
+          font-size: 200%;
+          font-weight: bold;
+        }
+        #poster {
+          width: 30%;
+          height: 30%;
+        }
+        #backdrop {
+          width: 30%;
+          height: 30%;
+        }
+        #movie-detail {
+          margin: 0 auto;
+          padding: 40px ;
+          width: 90%;
+        }
+      `}</style>
     </Layout>
   )
 }
