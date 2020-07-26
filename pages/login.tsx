@@ -2,7 +2,7 @@ import * as React from 'react'
 import axios from 'axios'
 import { useState, createContext } from "react"
 import Layout from '../components/Layout'
-import { User, CurrentUser } from '../interfaces/User'
+import { CurrentUser } from '../interfaces/User'
 
 export const CurrentUserContext = createContext<CurrentUser>({id: 0, token: "", name: "", email: ""})
 
@@ -13,15 +13,15 @@ const Login = () => {
   const [password2, setPassword2] = useState<string>("")
   const [currentUser, setCurrentUser] = useState<CurrentUser>({id: 0, token: "", name: "", email: ""})
 
-  const params: User = {
-    name: name,
-    email: email,
-    password: password1
-  }
+  const params = new URLSearchParams();
+  params.append('name', name)
+  params.append('email', email)
+  params.append('password', password1)
 
   const ExecLogin = () => {
     axios.post('http://localhost:3002/login', params)
     .then((response) => {
+      console.log(response.data)
       setCurrentUser({id: 0, token: response.data.token, name: name, email: email})
       localStorage.setItem('current_user',JSON.stringify({id: 0, token: response.data.token, name: name, email: email}))
     })
