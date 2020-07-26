@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { useState, useEffect } from "react"
+import Link from 'next/link'
 import axios from 'axios'
 
 import { TrendMovie } from '../interfaces/TrendMovie'
@@ -22,7 +23,9 @@ const Trend = () => {
       {trendMovies.slice(1, 9).map((movie, i) => (
         <div key={i}>
           <div className="column">
-            <img src={"https://image.tmdb.org/t/p/w500/" + movie.poster_path}></img>
+            <Link href={`/Movie/${movie.id}`}>
+              <img src={"https://image.tmdb.org/t/p/w500/" + movie.poster_path}></img>
+            </Link>
             <div>{movie.original_title}</div>
           </div>
           <br/>
