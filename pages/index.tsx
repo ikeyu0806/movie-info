@@ -1,5 +1,6 @@
 import Layout from '../components/Layout'
 import Trend from '../components/Trend'
+import Popular from '../components/Popular'
 
 const IndexPage = () => (
 
@@ -14,6 +15,8 @@ const IndexPage = () => (
       }
     `}</style>
     <Trend />
+    <h1>人気の映画</h1>
+    <Popular />
   </Layout>
   
 )

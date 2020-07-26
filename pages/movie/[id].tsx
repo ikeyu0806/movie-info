@@ -1,6 +1,11 @@
+import Layout from '../../components/Layout'
+import { useState, useEffect } from "react"
+
 const Movie = () => {
   return (
-    <h1>Hi</h1>
+    <Layout title="映画情報サービス">
+      <h1>Hi</h1>
+    </Layout>
   )
 }
 
