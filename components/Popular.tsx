@@ -26,7 +26,7 @@ const Popular = () => {
             <Link href={`/Movie/${movie.id}`}>
               <img src={"https://image.tmdb.org/t/p/w500/" + movie.poster_path}></img>
             </Link>
-            <div>{movie.original_title}</div>
+            <div>{movie.title}</div>
           </div>
           <br/>
         </div>

@@ -13,6 +13,7 @@ const Trend = () => {
       const trendMovies = await axios.get(
         'https://api.themoviedb.org/3/movie/now_playing?api_key='　+ process.env.tmdbApi + '&language=ja&page=1',
       );
+      console.log(trendMovies.data)
       setTrendMovies(trendMovies.data.results);
     }
     fetchRooms();
@@ -26,7 +27,7 @@ const Trend = () => {
             <Link href={`/Movie/${movie.id}`}>
               <img src={"https://image.tmdb.org/t/p/w500/" + movie.poster_path}></img>
             </Link>
-            <div>{movie.original_title}</div>
+            <div>{movie.title}</div>
           </div>
           <br/>
         </div>
