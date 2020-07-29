@@ -40,16 +40,23 @@ const MovieDetail = () => {
           </div>
           <div className="column movie-text-info">
             <h1>{movie.title}</h1>
-            <p>{movie.overview}</p>
+            <p id="overview">{movie.overview}</p>
+            {movie.homepage && <><br /><strong id="official-site">公式サイト</strong><br /></>}
             <a href={movie.homepage} target="_blank" rel="noopener noreferrer">{movie.homepage}</a>
-            <p>{movie.vote_average}</p>
-            <p>{movie.vote_count}</p>
+            <p className="tmdb-evaluate">TMDBの評価: {movie.vote_average}</p>
+            <p className="tmdb-evaluate">TMDBのレビュー数: {movie.vote_count}</p>
           </div>
       </div>
       <style jsx>{`
         h1 {
           font-size: 200%;
           font-weight: bold;
+        }
+        #overview {
+          margin-top: 10px;
+        }
+        #official-site {
+          font-size: 20px;
         }
         #backdrop {
           width: 30%;
@@ -60,6 +67,9 @@ const MovieDetail = () => {
           padding: 40px ;
           width: 90%;
         }
+      .tmdb-evaluate {
+          margin-top: 10px;
+      }
       `}</style>
     </Layout>
   )
