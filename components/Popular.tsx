@@ -5,15 +5,14 @@ import axios from 'axios'
 
 import { MoviePoster } from '../interfaces/MoviePoster'
 
-const Trend = () => {
+const Popular = () => {
   const [trendMovies, setTrendMovies] = useState<MoviePoster[]>([]);
 
   useEffect(() => {
     async function fetchRooms() {
       const trendMovies = await axios.get(
-        'https://api.themoviedb.org/3/movie/now_playing?api_key='　+ process.env.tmdbApi + '&language=ja&page=1',
+        'https://api.themoviedb.org/3/movie/popular?api_key='　+ process.env.tmdbApi + '&language=ja&page=1',
       );
-      console.log(trendMovies.data)
       setTrendMovies(trendMovies.data.results);
     }
     fetchRooms();
@@ -36,4 +35,4 @@ const Trend = () => {
   )
 }
 
-export default Trend
+export default Popular
