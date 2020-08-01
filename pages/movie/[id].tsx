@@ -4,6 +4,7 @@ import axios from 'axios'
 import { Review } from '../../interfaces/Review'
 
 import { Movie } from '../../interfaces/Movie'
+import { useRouter } from 'next/router';
 
 const MovieDetail = () => {
   const [movie, setMovie] = useState<Movie>({ id: 0,
@@ -50,9 +51,11 @@ const MovieDetail = () => {
     setScore(num)
   }
 
+  const router = useRouter();
+
   const params: Review = {
     movie_id: movie.id,
-    public_id: movie.id,
+    public_id: Math.floor( Math.random() * (999999)),
     comment: comment,
     score: score,
   }
@@ -61,6 +64,7 @@ const MovieDetail = () => {
     axios.post('http://localhost:3002/review/create', params)
     .then((response) => {
       console.log(response)
+      router.push('/Movie/' + movie.id);
     })
     .catch((error) => {
       console.log(error)
