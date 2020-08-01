@@ -20,6 +20,7 @@ const MovieDetail = () => {
   const [isShowModal, setIsShowModal] = useState<boolean>(false)
   const [score, setScore] = useState<number>(3)
   const [comment, setComment] = useState<string>("")
+  const [isPostReview, setIsPostReview] = useState<boolean>(false)
 
   useEffect(() => {
     async function fetchMovie() {
@@ -37,6 +38,7 @@ const MovieDetail = () => {
               })
     }
     fetchMovie();
+    window.location.search.match(/review=success/) && setIsPostReview(true)
   }, []);
 
   const showModal = () => {
@@ -64,7 +66,10 @@ const MovieDetail = () => {
     axios.post('http://localhost:3002/review/create', params)
     .then((response) => {
       console.log(response)
-      router.push('/Movie/' + movie.id);
+      router.push({
+        pathname: '/Movie/' + movie.id,
+        query: { review: 'success' }
+     })
     })
     .catch((error) => {
       console.log(error)
@@ -73,6 +78,11 @@ const MovieDetail = () => {
 
   return (
     <Layout title="映画情報サービス">
+      {isPostReview &&
+      <div className="notification is-primary">
+        <button className="delete" onClick={() => setIsPostReview(false)}></button>
+        レビューを投稿しました。
+      </div>}
       <div id="movie-detail" className="columns is-mobile">
           <div className="column">
             <img src={"https://image.tmdb.org/t/p/w500/" + movie.poster_path}></img>
