@@ -15,6 +15,8 @@ const MovieDetail = () => {
                                               vote_count: 0
                                             });
 
+  const [isShowModal, setIsShowModal] = useState<boolean>(false)
+
   useEffect(() => {
     async function fetchMovie() {
       const Movie = await axios.get(
@@ -32,6 +34,15 @@ const MovieDetail = () => {
     }
     fetchMovie();
   }, []);
+
+  const showModal = () => {
+    setIsShowModal(true)
+  }
+
+  const closeModal = () => {
+    setIsShowModal(false)
+  }
+
   return (
     <Layout title="映画情報サービス">
       <div id="movie-detail" className="columns is-mobile">
@@ -45,6 +56,15 @@ const MovieDetail = () => {
             <a href={movie.homepage} target="_blank" rel="noopener noreferrer">{movie.homepage}</a>
             <p className="tmdb-evaluate">TMDBの評価: {movie.vote_average}</p>
             <p className="tmdb-evaluate">TMDBのレビュー数: {movie.vote_count}</p>
+            <a className="button is-primary" onClick={showModal}>
+              <strong>レビューを投稿する</strong>
+            </a>
+            <div className={isShowModal ?"modal is-active" : "modal"}>
+              <div className="modal-background"></div>
+              <div className="modal-content">
+              </div>
+              <button className="modal-close is-large" aria-label="close" onClick={closeModal}></button>
+            </div>
           </div>
       </div>
       <style jsx>{`
