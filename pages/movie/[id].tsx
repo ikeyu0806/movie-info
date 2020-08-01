@@ -1,6 +1,7 @@
 import Layout from '../../components/Layout'
 import { useState, useEffect } from "react"
 import axios from 'axios'
+import { Review } from '../../interfaces/Review'
 
 import { Movie } from '../../interfaces/Movie'
 
@@ -16,7 +17,8 @@ const MovieDetail = () => {
                                             });
 
   const [isShowModal, setIsShowModal] = useState<boolean>(false)
-  const [score, setScore] = useState<number>(1)
+  const [score, setScore] = useState<number>(3)
+  const [comment, setComment] = useState<string>("")
 
   useEffect(() => {
     async function fetchMovie() {
@@ -48,6 +50,23 @@ const MovieDetail = () => {
     setScore(num)
   }
 
+  const params: Review = {
+    movie_id: movie.id,
+    public_id: movie.id,
+    comment: comment,
+    score: score,
+  }
+
+  const submitReview = () => {
+    axios.post('http://localhost:3002/review/create', params)
+    .then((response) => {
+      console.log(response)
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+  }
+
   return (
     <Layout title="映画情報サービス">
       <div id="movie-detail" className="columns is-mobile">
@@ -75,11 +94,10 @@ const MovieDetail = () => {
                   <div className="field">
                     <label className="label">感想</label>
                     <div className="control">
-                      <textarea className="textarea"></textarea>
+                      <textarea className="textarea" onChange={(e) => { setComment(e.target.value)}}></textarea>
                     </div>
                   </div>
                   <div className="field rate-field columns">
-                    {console.log(score)}
                     <a className={(score >= 1) ? "star yellow-star" : "star silver-star"} onClick={() => keepScore(1)}>★</a>
                     <a className={(score >= 2) ? "star yellow-star" : "star silver-star"} onClick={() => keepScore(2)}>★</a>
                     <a className={(score >= 3) ? "star yellow-star" : "star silver-star"} onClick={() => keepScore(3)}>★</a>
@@ -88,7 +106,7 @@ const MovieDetail = () => {
                   </div>
                   </section>
                   <footer className="modal-card-foot">
-                    <button className="button is-success">投稿する</button>
+                    <button className="button is-success" onClick={submitReview}>投稿する</button>
                     <button className="button" onClick={closeModal}>キャンセル</button>
                   </footer>
                 </div>
