@@ -3,6 +3,7 @@ import axios from 'axios'
 import { useState, createContext } from "react"
 import Layout from '../components/Layout'
 import { CurrentUser } from '../interfaces/User'
+import { useRouter } from 'next/router'
 
 export const CurrentUserContext = createContext<CurrentUser>({id: 0, token: "", name: "", email: ""})
 
@@ -15,6 +16,8 @@ const Login = () => {
   params.append('name', name)
   params.append('password', password1)
 
+  const router = useRouter();
+
   const ExecLogin = () => {
     axios.post('http://localhost:3002/login', params)
     .then((response) => {
@@ -24,6 +27,10 @@ const Login = () => {
     .catch((error) => {
       console.log(error)
     })
+    router.push({
+      pathname: '/',
+      query: { after_login: 'true' }
+   })
   }
   return (
 
@@ -75,7 +82,9 @@ const Login = () => {
 
           <div className="field is-grouped confirm-buttons">
             <div className="control">
-              <button className="button is-link" onClick={ExecLogin}>送信</button>
+              <button className="button is-link"
+                      onClick={ExecLogin}
+                      disabled={!name ||!password1}>送信</button>
             </div>
             <div className="control">
               <button className="button is-link is-light">キャンセル</button>

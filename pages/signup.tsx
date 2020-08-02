@@ -3,6 +3,7 @@ import axios from 'axios'
 import { useState, createContext } from "react"
 import Layout from '../components/Layout'
 import { User, CurrentUser } from '../interfaces/User'
+import { useRouter } from 'next/router'
 
 export const CurrentUserContext = createContext<CurrentUser>({id: 0, token: "", name: "", email: ""})
 
@@ -12,6 +13,7 @@ const SignUp = () => {
   const [password1, setPassword1] = useState<string>("")
   const [password2, setPassword2] = useState<string>("")
   const [currentUser, setCurrentUser] = useState<CurrentUser>({id: 0, token: "", name: "", email: ""})
+  const [consent, setConsent] = useState<boolean>(false)
 
   const params: User = {
     name: name,
@@ -19,16 +21,23 @@ const SignUp = () => {
     password: password1
   }
 
+  const router = useRouter();
+
   const ExecSignUp = () => {
     axios.post('http://localhost:3002/signup', params)
     .then((response) => {
       setCurrentUser({id: 0, token: response.data.token, name: name, email: email})
       localStorage.setItem('current_user',JSON.stringify({id: 0, token: response.data.token, name: name, email: email}))
+      router.push({
+        pathname: '/',
+        query: { after_login: 'true' }
+     })
     })
     .catch((error) => {
       console.log(error)
     })
   }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <Layout title="映画情報サービス">
@@ -105,15 +114,17 @@ const SignUp = () => {
               <div className="field">
                 <div className="control">
                   <label className="checkbox">
-                    <input type="checkbox" />
-                    <a href="#">規約</a>に同意します。
+                    <input type="checkbox" onClick={() => setConsent(!consent)} />
+                    <a>規約</a>に同意します。
                   </label>
                 </div>
               </div>
 
               <div className="field is-grouped confirm-buttons">
                 <div className="control">
-                  <button className="button is-link" onClick={ExecSignUp}>送信</button>
+                  <button className="button is-link"
+                          onClick={ExecSignUp}
+                          disabled={!name || !email || !password1 || !password2 || !consent || password1 !== password2}>送信</button>
                 </div>
                 <div className="control">
                   <button className="button is-link is-light">キャンセル</button>

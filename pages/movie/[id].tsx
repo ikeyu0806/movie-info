@@ -4,7 +4,7 @@ import axios from 'axios'
 import { Review } from '../../interfaces/Review'
 
 import { Movie } from '../../interfaces/Movie'
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/router'
 
 const MovieDetail = () => {
   const [movie, setMovie] = useState<Movie>({ id: 0,
