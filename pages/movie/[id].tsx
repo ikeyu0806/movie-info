@@ -21,6 +21,8 @@ const MovieDetail = () => {
   const [score, setScore] = useState<number>(3)
   const [comment, setComment] = useState<string>("")
   const [isPostReview, setIsPostReview] = useState<boolean>(false)
+  // TODO:<Review[]>だとうまくいかないので一旦any。
+  const [reviews, setReviews] = useState<any>([])
 
   useEffect(() => {
     async function fetchMovie() {
@@ -38,19 +40,22 @@ const MovieDetail = () => {
               })
     }
     fetchMovie();
+    async function fetchReviews() {
+      const Reviews = await axios.get(
+        'http://localhost:3002/review/' + window.location.pathname.split('/')[2]
+      );
+      setReviews(Reviews.data)
+    }
+    fetchReviews();
     window.location.search.match(/review=success/) && setIsPostReview(true)
   }, []);
 
-  const showModal = () => {
+  const showModal = () => { 
     setIsShowModal(true)
   }
 
   const closeModal = () => {
     setIsShowModal(false)
-  }
-
-  const keepScore = (num: number) => {
-    setScore(num)
   }
 
   const router = useRouter();
@@ -89,6 +94,7 @@ const MovieDetail = () => {
           </div>
           <div className="column movie-text-info">
             <h1>{movie.title}</h1>
+            <span className="tag is-light">解説</span>
             <p id="overview">{movie.overview}</p>
             {movie.homepage && <><br /><strong id="official-site">公式サイト</strong><br /></>}
             <a href={movie.homepage} target="_blank" rel="noopener noreferrer">{movie.homepage}</a>
@@ -97,6 +103,23 @@ const MovieDetail = () => {
             <a className="button is-primary review-button" onClick={showModal}>
               <strong>レビューを投稿する</strong>
             </a>
+            <div className="reviews">
+              <div className="review-list"><span className="tag is-light is-large">レビュー一覧</span></div>
+              <div className="review-contents">
+                {reviews.map((review: Review, i: number) => (
+                  <div key={i}>
+                    <div className="columns reviewed-stars">
+                      <div className={(review.score >= 1) ? "yellow-star" : "silver-star"}>★</div>
+                      <div className={(review.score >= 2) ? "yellow-star" : "silver-star"}>★</div>
+                      <div className={(review.score >= 3) ? "yellow-star" : "silver-star"}>★</div>
+                      <div className={(review.score >= 4) ? "yellow-star" : "silver-star"}>★</div>
+                      <div className={(review.score >= 5) ? "yellow-star" : "silver-star"}>★</div>
+                    </div>
+                    <p className="review-comment">{review.comment}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
             <div className={isShowModal ? "modal is-active" : "modal"}>
               <div className="modal-background"></div>
                 <div className="modal-card">
@@ -111,12 +134,12 @@ const MovieDetail = () => {
                       <textarea className="textarea" onChange={(e) => { setComment(e.target.value)}}></textarea>
                     </div>
                   </div>
-                  <div className="field rate-field columns">
-                    <a className={(score >= 1) ? "star yellow-star" : "star silver-star"} onClick={() => keepScore(1)}>★</a>
-                    <a className={(score >= 2) ? "star yellow-star" : "star silver-star"} onClick={() => keepScore(2)}>★</a>
-                    <a className={(score >= 3) ? "star yellow-star" : "star silver-star"} onClick={() => keepScore(3)}>★</a>
-                    <a className={(score >= 4) ? "star yellow-star" : "star silver-star"} onClick={() => keepScore(4)}>★</a>
-                    <a className={(score >= 5) ? "star yellow-star" : "star silver-star"} onClick={() => keepScore(5)}>★</a>
+                  <div className="field rate-field columns star">
+                    <a className={(score >= 1) ? "yellow-star" : "silver-star"} onClick={() => setScore(1)}>★</a>
+                    <a className={(score >= 2) ? "yellow-star" : "silver-star"} onClick={() => setScore(2)}>★</a>
+                    <a className={(score >= 3) ? "yellow-star" : "silver-star"} onClick={() => setScore(3)}>★</a>
+                    <a className={(score >= 4) ? "yellow-star" : "silver-star"} onClick={() => setScore(4)}>★</a>
+                    <a className={(score >= 5) ? "yellow-star" : "silver-star"} onClick={() => setScore(5)}>★</a>
                   </div>
                   </section>
                   <footer className="modal-card-foot">
@@ -168,6 +191,27 @@ const MovieDetail = () => {
         }
         .silver-star {
           color: silver;
+        }
+        .comments {
+          margin-top: 20px;
+        }
+        .reviews {
+          margin-top: 20px;
+        }
+        .review-list {
+          margin-bottom: 20px;
+        }
+        .review-comment {
+          margin-bottom: 30px;
+          margin-left: 10px;
+        }
+        .reviewed-stars {
+          margin-left: 10px;
+        }
+        .reviewed-star {
+          position: relative;
+          font-size: 15px;
+          letter-spacing : 0px;
         }
       `}</style>
     </Layout>
