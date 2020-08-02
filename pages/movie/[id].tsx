@@ -94,6 +94,7 @@ const MovieDetail = () => {
           </div>
           <div className="column movie-text-info">
             <h1>{movie.title}</h1>
+            <span className="tag is-light">解説</span>
             <p id="overview">{movie.overview}</p>
             {movie.homepage && <><br /><strong id="official-site">公式サイト</strong><br /></>}
             <a href={movie.homepage} target="_blank" rel="noopener noreferrer">{movie.homepage}</a>
@@ -103,7 +104,7 @@ const MovieDetail = () => {
               <strong>レビューを投稿する</strong>
             </a>
             <div className="reviews">
-              <div className="review-list">レビュー一覧</div>
+              <div className="review-list"><span className="tag is-light is-large">レビュー一覧</span></div>
               <div className="review-contents">
                 {reviews.map((review: Review, i: number) => (
                   <div key={i}>
