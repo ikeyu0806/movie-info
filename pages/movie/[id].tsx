@@ -109,11 +109,11 @@ const MovieDetail = () => {
                 {reviews.map((review: Review, i: number) => (
                   <div key={i}>
                     <div className="columns reviewed-stars">
-                      <div className={(review.score >= 1) ? "reviewed- yellow-star" : "reviewed- silver-star"}>★</div>
-                      <div className={(review.score >= 2) ? "reviewed- yellow-star" : "reviewed- silver-star"}>★</div>
-                      <div className={(review.score >= 3) ? "reviewed- yellow-star" : "reviewed- silver-star"}>★</div>
-                      <div className={(review.score >= 4) ? "reviewed- yellow-star" : "reviewed- silver-star"}>★</div>
-                      <div className={(review.score >= 5) ? "reviewed- yellow-star" : "reviewed- silver-star"}>★</div>
+                      <div className={(review.score >= 1) ? "yellow-star" : "silver-star"}>★</div>
+                      <div className={(review.score >= 2) ? "yellow-star" : "silver-star"}>★</div>
+                      <div className={(review.score >= 3) ? "yellow-star" : "silver-star"}>★</div>
+                      <div className={(review.score >= 4) ? "yellow-star" : "silver-star"}>★</div>
+                      <div className={(review.score >= 5) ? "yellow-star" : "silver-star"}>★</div>
                     </div>
                     <p className="review-comment">{review.comment}</p>
                   </div>
@@ -134,12 +134,12 @@ const MovieDetail = () => {
                       <textarea className="textarea" onChange={(e) => { setComment(e.target.value)}}></textarea>
                     </div>
                   </div>
-                  <div className="field rate-field columns">
-                    <a className={(score >= 1) ? "star yellow-star" : "star silver-star"} onClick={() => setScore(1)}>★</a>
-                    <a className={(score >= 2) ? "star yellow-star" : "star silver-star"} onClick={() => setScore(2)}>★</a>
-                    <a className={(score >= 3) ? "star yellow-star" : "star silver-star"} onClick={() => setScore(3)}>★</a>
-                    <a className={(score >= 4) ? "star yellow-star" : "star silver-star"} onClick={() => setScore(4)}>★</a>
-                    <a className={(score >= 5) ? "star yellow-star" : "star silver-star"} onClick={() => setScore(5)}>★</a>
+                  <div className="field rate-field columns star">
+                    <a className={(score >= 1) ? "yellow-star" : "silver-star"} onClick={() => setScore(1)}>★</a>
+                    <a className={(score >= 2) ? "yellow-star" : "silver-star"} onClick={() => setScore(2)}>★</a>
+                    <a className={(score >= 3) ? "yellow-star" : "silver-star"} onClick={() => setScore(3)}>★</a>
+                    <a className={(score >= 4) ? "yellow-star" : "silver-star"} onClick={() => setScore(4)}>★</a>
+                    <a className={(score >= 5) ? "yellow-star" : "silver-star"} onClick={() => setScore(5)}>★</a>
                   </div>
                   </section>
                   <footer className="modal-card-foot">
