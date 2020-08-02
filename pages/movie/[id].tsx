@@ -58,10 +58,6 @@ const MovieDetail = () => {
     setIsShowModal(false)
   }
 
-  const keepScore = (num: number) => {
-    setScore(num)
-  }
-
   const router = useRouter();
 
   const params: Review = {
@@ -106,6 +102,23 @@ const MovieDetail = () => {
             <a className="button is-primary review-button" onClick={showModal}>
               <strong>レビューを投稿する</strong>
             </a>
+            <div className="reviews">
+              <div className="review-list">レビュー一覧</div>
+              <div className="review-contents">
+                {reviews.map((review: Review, i: number) => (
+                  <div key={i}>
+                    <div className="columns reviewed-stars">
+                      <div className={(review.score >= 1) ? "reviewed- yellow-star" : "reviewed- silver-star"}>★</div>
+                      <div className={(review.score >= 2) ? "reviewed- yellow-star" : "reviewed- silver-star"}>★</div>
+                      <div className={(review.score >= 3) ? "reviewed- yellow-star" : "reviewed- silver-star"}>★</div>
+                      <div className={(review.score >= 4) ? "reviewed- yellow-star" : "reviewed- silver-star"}>★</div>
+                      <div className={(review.score >= 5) ? "reviewed- yellow-star" : "reviewed- silver-star"}>★</div>
+                    </div>
+                    <p className="review-comment">{review.comment}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
             <div className={isShowModal ? "modal is-active" : "modal"}>
               <div className="modal-background"></div>
                 <div className="modal-card">
@@ -121,11 +134,11 @@ const MovieDetail = () => {
                     </div>
                   </div>
                   <div className="field rate-field columns">
-                    <a className={(score >= 1) ? "star yellow-star" : "star silver-star"} onClick={() => keepScore(1)}>★</a>
-                    <a className={(score >= 2) ? "star yellow-star" : "star silver-star"} onClick={() => keepScore(2)}>★</a>
-                    <a className={(score >= 3) ? "star yellow-star" : "star silver-star"} onClick={() => keepScore(3)}>★</a>
-                    <a className={(score >= 4) ? "star yellow-star" : "star silver-star"} onClick={() => keepScore(4)}>★</a>
-                    <a className={(score >= 5) ? "star yellow-star" : "star silver-star"} onClick={() => keepScore(5)}>★</a>
+                    <a className={(score >= 1) ? "star yellow-star" : "star silver-star"} onClick={() => setScore(1)}>★</a>
+                    <a className={(score >= 2) ? "star yellow-star" : "star silver-star"} onClick={() => setScore(2)}>★</a>
+                    <a className={(score >= 3) ? "star yellow-star" : "star silver-star"} onClick={() => setScore(3)}>★</a>
+                    <a className={(score >= 4) ? "star yellow-star" : "star silver-star"} onClick={() => setScore(4)}>★</a>
+                    <a className={(score >= 5) ? "star yellow-star" : "star silver-star"} onClick={() => setScore(5)}>★</a>
                   </div>
                   </section>
                   <footer className="modal-card-foot">
@@ -136,11 +149,6 @@ const MovieDetail = () => {
             </div>
           </div>
       </div>
-      <div>
-            {reviews.map((review: Review, i: number) => (
-              <div key={i}>{review.comment}</div>
-            ))}
-          </div>
       <style jsx>{`
         h1 {
           font-size: 200%;
@@ -182,6 +190,27 @@ const MovieDetail = () => {
         }
         .silver-star {
           color: silver;
+        }
+        .comments {
+          margin-top: 20px;
+        }
+        .reviews {
+          margin-top: 20px;
+        }
+        .review-list {
+          margin-bottom: 20px;
+        }
+        .review-comment {
+          margin-bottom: 30px;
+          margin-left: 10px;
+        }
+        .reviewed-stars {
+          margin-left: 10px;
+        }
+        .reviewed-star {
+          position: relative;
+          font-size: 15px;
+          letter-spacing : 0px;
         }
       `}</style>
     </Layout>
