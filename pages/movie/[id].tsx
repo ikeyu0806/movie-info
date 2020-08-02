@@ -21,6 +21,7 @@ const MovieDetail = () => {
   const [score, setScore] = useState<number>(3)
   const [comment, setComment] = useState<string>("")
   const [isPostReview, setIsPostReview] = useState<boolean>(false)
+  const [reviews, setReviews] = useState<Review[]>([])
 
   useEffect(() => {
     async function fetchMovie() {
@@ -38,10 +39,18 @@ const MovieDetail = () => {
               })
     }
     fetchMovie();
+    async function fetchReviews() {
+      const Reviews = await axios.get(
+        'http://localhost:3002/review/' + window.location.pathname.split('/')[2]
+      );
+      setReviews(Reviews.data)
+    }
+    fetchReviews();
+    console.log(reviews)
     window.location.search.match(/review=success/) && setIsPostReview(true)
   }, []);
 
-  const showModal = () => {
+  const showModal = () => { 
     setIsShowModal(true)
   }
 
