@@ -3,6 +3,7 @@ import axios from 'axios'
 import { useState, createContext } from "react"
 import Layout from '../components/Layout'
 import { User, CurrentUser } from '../interfaces/User'
+import { useRouter } from 'next/router'
 
 export const CurrentUserContext = createContext<CurrentUser>({id: 0, token: "", name: "", email: ""})
 
@@ -20,11 +21,17 @@ const SignUp = () => {
     password: password1
   }
 
+  const router = useRouter();
+
   const ExecSignUp = () => {
     axios.post('http://localhost:3002/signup', params)
     .then((response) => {
       setCurrentUser({id: 0, token: response.data.token, name: name, email: email})
       localStorage.setItem('current_user',JSON.stringify({id: 0, token: response.data.token, name: name, email: email}))
+      router.push({
+        pathname: '/',
+        query: { after_login: 'true' }
+     })
     })
     .catch((error) => {
       console.log(error)
