@@ -4,7 +4,7 @@ import axios from 'axios'
 import { Review } from '../../interfaces/Review'
 
 import { Movie } from '../../interfaces/Movie'
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/router'
 
 const MovieDetail = () => {
   const [movie, setMovie] = useState<Movie>({ id: 0,
@@ -21,7 +21,8 @@ const MovieDetail = () => {
   const [score, setScore] = useState<number>(3)
   const [comment, setComment] = useState<string>("")
   const [isPostReview, setIsPostReview] = useState<boolean>(false)
-  const [reviews, setReviews] = useState<Review[]>([])
+  // TODO:<Review[]>だとうまくいかないので一旦any。
+  const [reviews, setReviews] = useState<any>([])
 
   useEffect(() => {
     async function fetchMovie() {
@@ -46,7 +47,6 @@ const MovieDetail = () => {
       setReviews(Reviews.data)
     }
     fetchReviews();
-    console.log(reviews)
     window.location.search.match(/review=success/) && setIsPostReview(true)
   }, []);
 
@@ -136,6 +136,11 @@ const MovieDetail = () => {
             </div>
           </div>
       </div>
+      <div>
+            {reviews.map((review: Review, i: number) => (
+              <div key={i}>{review.comment}</div>
+            ))}
+          </div>
       <style jsx>{`
         h1 {
           font-size: 200%;
