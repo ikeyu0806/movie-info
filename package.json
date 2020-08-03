@@ -2,12 +2,11 @@
   "name": "with-typescript",
   "version": "1.0.0",
   "scripts": {
-    "dev": "next",
-    "build": "next build",
-    "start": "next start",
-    "type-check": "tsc"
+    "test": "jest"
   },
   "dependencies": {
+    "@types/enzyme-adapter-react-16": "^1.0.6",
+    "@types/jest": "^26.0.8",
     "@zeit/next-sass": "^1.0.1",
     "axios": "^0.19.2",
     "next": "latest",
@@ -15,10 +14,40 @@
     "react-dom": "^16.12.0"
   },
   "devDependencies": {
+    "@babel/preset-typescript": "^7.10.4",
     "@types/node": "^12.12.21",
     "@types/react": "^16.9.16",
     "@types/react-dom": "^16.9.4",
+    "babel-core": "^6.26.3",
+    "babel-jest": "^26.2.2",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
+    "enzyme-to-json": "^3.5.0",
+    "jest": "^26.2.2",
+    "jest-enzyme": "^7.1.2",
+    "ts-jest": "^26.1.4",
     "typescript": "3.7.3"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "js",
+      "tsx",
+      "jsx"
+    ],
+    "transform": {
+      "^.+\\.ts$": "ts-jest"
+    },
+    "globals": {
+      "ts-jest": {
+        "tsConfig": "tsconfig.json"
+      }
+    },
+    "testMatch": [
+      "**/test/**/*.test.ts"
+    ]
   },
   "license": "ISC"
 }
