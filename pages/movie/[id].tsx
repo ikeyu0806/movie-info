@@ -21,8 +21,7 @@ const MovieDetail = (): JSX.Element => {
   const [score, setScore] = useState<number>(3)
   const [comment, setComment] = useState<string>("")
   const [isPostReview, setIsPostReview] = useState<boolean>(false)
-  // TODO:<Review[]>だとうまくいかないので一旦any。
-  const [reviews, setReviews] = useState<any>([])
+  const [reviews, setReviews] = useState<Review[]>([])
   const [login, setLogin] = useState<boolean>(false)
 
   useEffect(() => {
