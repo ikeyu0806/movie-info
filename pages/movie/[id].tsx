@@ -23,6 +23,7 @@ const MovieDetail = () => {
   const [isPostReview, setIsPostReview] = useState<boolean>(false)
   // TODO:<Review[]>だとうまくいかないので一旦any。
   const [reviews, setReviews] = useState<any>([])
+  const [login, setLogin] = useState<boolean>(false)
 
   useEffect(() => {
     async function fetchMovie() {
@@ -48,6 +49,7 @@ const MovieDetail = () => {
     }
     fetchReviews();
     window.location.search.match(/review=success/) && setIsPostReview(true)
+    localStorage.getItem("current_user") != null && setLogin(true)
   }, []);
 
   const showModal = () => { 
@@ -100,9 +102,11 @@ const MovieDetail = () => {
             <a href={movie.homepage} target="_blank" rel="noopener noreferrer">{movie.homepage}</a>
             <p className="tmdb-evaluate">TMDBの評価: {movie.vote_average}</p>
             <p className="tmdb-evaluate">TMDBのレビュー数: {movie.vote_count}</p>
-            <a className="button is-primary review-button" onClick={showModal}>
-              <strong>レビューを投稿する</strong>
-            </a>
+            {login &&
+              <a className="button is-primary review-button" onClick={showModal}>
+                <strong>レビューを投稿する</strong>
+              </a>
+            }
             <div className="reviews">
               <div className="review-list"><span className="tag is-light is-large">レビュー一覧</span></div>
               <div className="review-contents">
