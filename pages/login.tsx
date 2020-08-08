@@ -17,20 +17,22 @@ const Login = () => {
   params.append('password', password1)
 
   const router = useRouter();
+  const [invalidFlash, setInvalidFlash] = useState<boolean>(false)
 
   const ExecLogin = () => {
     axios.post('http://localhost:3002/login', params)
     .then((response) => {
       setCurrentUser({id: 0, token: response.data.token, name: name, email: response.data.user.email})
       localStorage.setItem('current_user',JSON.stringify({id: 0, token: response.data.token, name: name}))
+      router.push({
+        pathname: '/',
+        query: { after_login: 'true' }
+     　})
     })
     .catch((error) => {
       console.log(error)
+      setInvalidFlash(true)
     })
-    router.push({
-      pathname: '/',
-      query: { after_login: 'true' }
-   })
   }
   return (
 
@@ -50,6 +52,10 @@ const Login = () => {
       </>
       :
       <>
+        {invalidFlash && <div className="notification is-danger">
+          <button className="delete" onClick={() => setInvalidFlash(false)}></button>
+          入力された情報に誤りがあります。
+        </div>}
         <div className="authentication-form">
           <div className="field">
             <h1>ログイン</h1>
