@@ -1,0 +1,11 @@
+version: '3'
+services:
+  movie-info-frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+     - ./:/workspace/movie-info-frontend
+    command: "yarn run dev"
+    ports:
+     - "3001:3000"
