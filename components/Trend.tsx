@@ -13,7 +13,6 @@ const Trend = () => {
       const trendMovies = await axios.get(
         'https://api.themoviedb.org/3/movie/now_playing?api_key='　+ process.env.tmdbApi + '&language=ja&page=1',
       );
-      console.log(trendMovies.data)
       setTrendMovies(trendMovies.data.results);
     }
     fetchRooms();
