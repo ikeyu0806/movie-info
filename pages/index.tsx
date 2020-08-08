@@ -1,9 +1,9 @@
 import Layout from '../components/Layout'
 import Trend from '../components/Trend'
 import Popular from '../components/Popular'
-import { useState, useEffect } from "react"
+import React, { useState, useEffect } from "react"
 
-const IndexPage = () => {
+const IndexPage = (): JSX.Element => {
   const [loginFlash, setLoginFlash] = useState<boolean>(false)
   const [logoutFlash, setLogoutFlash] = useState<boolean>(false)
 

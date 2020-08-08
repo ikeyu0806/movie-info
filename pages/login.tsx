@@ -7,7 +7,7 @@ import { useRouter } from 'next/router'
 
 export const CurrentUserContext = createContext<CurrentUser>({id: 0, token: "", name: "", email: ""})
 
-const Login = () => {
+const Login = (): JSX.Element => {
   const [name, setName] = useState<string>("")
   const [password1, setPassword1] = useState<string>("")
   const [currentUser, setCurrentUser] = useState<CurrentUser>({id: 0, token: "", name: "", email: ""})
@@ -26,8 +26,7 @@ const Login = () => {
       localStorage.setItem('current_user',JSON.stringify({id: 0, token: response.data.token, name: name}))
       router.push({
         pathname: '/',
-        query: { after_login: 'true' }
-     　})
+        query: { after_login: 'true' }})
     })
     .catch((error) => {
       console.log(error)
@@ -35,7 +34,6 @@ const Login = () => {
     })
   }
   return (
-
     <CurrentUserContext.Provider value={currentUser}>
       <Layout title="映画情報サービス">
       {currentUser.token

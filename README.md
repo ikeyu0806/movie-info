@@ -9,6 +9,12 @@
 ## TMDB
 https://www.themoviedb.org/?language=ja
 
+### Lint
+`yarn eslint pages/index.tsx`
+
+### test
+`yarn test test/Layout.test.tsx`
+
 ## Author
 Yuki Ikegaya
 

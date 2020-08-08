@@ -1,10 +1,10 @@
 import Link from 'next/link'
 import Layout from '../components/Layout'
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { CurrentUser } from '../interfaces/User'
 import { useRouter } from 'next/router'
 
-const MyPage = () => {
+const MyPage = (): JSX.Element => {
   const [currentUser, setCurrentUser] = useState<CurrentUser>({id: 0, token: "", name: "", email: ""});
 
   useEffect(() => {
