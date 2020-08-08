@@ -35,7 +35,6 @@ const Login = () => {
     })
   }
   return (
-
     <CurrentUserContext.Provider value={currentUser}>
       <Layout title="映画情報サービス">
       {currentUser.token
