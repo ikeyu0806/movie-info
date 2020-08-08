@@ -2,6 +2,7 @@ import Link from 'next/link'
 import Layout from '../components/Layout'
 import { useEffect, useState } from "react"
 import { CurrentUser } from '../interfaces/User'
+import { useRouter } from 'next/router'
 
 const MyPage = () => {
   const [currentUser, setCurrentUser] = useState<CurrentUser>({id: 0, token: "", name: "", email: ""});
@@ -13,9 +14,15 @@ const MyPage = () => {
     }
   }, []);
 
+  const router = useRouter();
+
   const ExecLogOut = () => {
     localStorage.removeItem('current_user')
     setCurrentUser({id: 0, token: "", name: "", email: ""})
+    router.push({
+      pathname: '/',
+      query: { after_logout: 'true' }
+   })
   }
 
   return (

@@ -4,17 +4,23 @@ import Popular from '../components/Popular'
 import { useState, useEffect } from "react"
 
 const IndexPage = () => {
-  const [showFlash, setShowFlash] = useState<boolean>(false)
+  const [loginFlash, setLoginFlash] = useState<boolean>(false)
+  const [logoutFlash, setLogoutFlash] = useState<boolean>(false)
 
   useEffect(() => {
-    window.location.search.match(/after_login=true/) && setShowFlash(true)
+    window.location.search.match(/after_login=true/) && setLoginFlash(true)
+    window.location.search.match(/after_logout=true/) && setLogoutFlash(true)
   }, [])
 
   return (
     <Layout title="映画情報サービス">
-      {showFlash && <div className="notification is-primary">
-        <button className="delete" onClick={() => setShowFlash(false)}></button>
+      {loginFlash && <div className="notification is-primary">
+        <button className="delete" onClick={() => setLoginFlash(false)}></button>
         ログインしました。
+      </div>}
+      {logoutFlash && <div className="notification is-danger">
+        <button className="delete" onClick={() => setLogoutFlash(false)}></button>
+        ログアウトしました。
       </div>}
       <h1>公開中の映画</h1>
       <style jsx>{`
