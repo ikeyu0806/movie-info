@@ -7,7 +7,7 @@ import { useRouter } from 'next/router'
 
 export const CurrentUserContext = createContext<CurrentUser>({id: 0, token: "", name: "", email: ""})
 
-const SignUp = () => {
+const SignUp = (): JSX.Element => {
   const [name, setName] = useState<string>("")
   const [email, setEmail] = useState<string>("")
   const [password1, setPassword1] = useState<string>("")
