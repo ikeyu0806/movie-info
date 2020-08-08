@@ -6,7 +6,7 @@ import { Review } from '../../interfaces/Review'
 import { Movie } from '../../interfaces/Movie'
 import { useRouter } from 'next/router'
 
-const MovieDetail = () => {
+const MovieDetail = (): JSX.Element => {
   const [movie, setMovie] = useState<Movie>({ id: 0,
                                               title: '',
                                               poster_path: '',
@@ -28,7 +28,7 @@ const MovieDetail = () => {
   useEffect(() => {
     async function fetchMovie() {
       const Movie = await axios.get(
-        'https://api.themoviedb.org/3/movie/' + window.location.pathname.split('/')[2] + '?api_key='　+ process.env.tmdbApi + '&language=ja',
+        'https://api.themoviedb.org/3/movie/' + window.location.pathname.split('/')[2] + '?api_key=' + process.env.tmdbApi + '&language=ja',
       );
       setMovie({id: Movie.data.id,
                 title: Movie.data.title,
