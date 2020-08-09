@@ -9,13 +9,13 @@ const Trend = (): JSX.Element => {
   const [trendMovies, setTrendMovies] = useState<MoviePoster[]>([]);
 
   useEffect(() => {
-    async function fetchRooms() {
+    async function fetchMovies() {
       const trendMovies = await axios.get(
         'https://api.themoviedb.org/3/movie/now_playing?api_key=' + process.env.tmdbApi + '&language=ja&page=1',
       );
       setTrendMovies(trendMovies.data.results);
     }
-    fetchRooms();
+    fetchMovies();
   }, []);
 
   return (
