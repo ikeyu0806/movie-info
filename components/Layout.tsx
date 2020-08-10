@@ -46,7 +46,7 @@ const Layout = ({ children, title = 'This is the default title' }: Props): JSX.E
           <div className="navbar-end">
             <div className="navbar-item">
               {currentUser.name || loginUser.name
-                ? <div>{currentUser.name ? currentUser.name : loginUser.name}でログイン中です</div>
+                ? <span className="tag is-primary">{currentUser.name ? currentUser.name : loginUser.name}でログイン中です</span>
                 :              
                 <div className="buttons">
                   <a className="button is-primary" href="/signup">

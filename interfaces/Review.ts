@@ -4,4 +4,8 @@ export interface Review {
   comment: string
   score: number
   user_id: number | null
+  User?: {
+    name: string
+  }
 }
+
