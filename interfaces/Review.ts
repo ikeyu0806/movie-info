@@ -3,4 +3,5 @@ export interface Review {
   public_id: number
   comment: string
   score: number
+  user_id: number | null
 }

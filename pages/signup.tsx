@@ -22,12 +22,13 @@ const SignUp = (): JSX.Element => {
   }
 
   const router = useRouter();
+  const [invalidFlash, setInvalidFlash] = useState<boolean>(false)
 
   const ExecSignUp = () => {
     axios.post('http://localhost:3002/signup', params)
     .then((response) => {
-      setCurrentUser({id: 0, token: response.data.token, name: name, email: email})
-      localStorage.setItem('current_user',JSON.stringify({id: 0, token: response.data.token, name: name, email: email}))
+      setCurrentUser({id: response.data.user_id, token: response.data.token, name: name, email: email})
+      localStorage.setItem('current_user',JSON.stringify({user_id: response.data.user_id, token: response.data.token, name: name, email: email}))
       router.push({
         pathname: '/',
         query: { after_login: 'true' }
@@ -35,6 +36,7 @@ const SignUp = (): JSX.Element => {
     })
     .catch((error) => {
       console.log(error)
+      setInvalidFlash(true)
     })
   }
 
@@ -55,6 +57,10 @@ const SignUp = (): JSX.Element => {
           </>
         :
           <>
+            {invalidFlash && <div className="notification is-danger">
+              <button className="delete" onClick={() => setInvalidFlash(false)}></button>
+                入力された情報に誤りがあります。
+              </div>}
             <div className="authentication-form">
               <div className="field">
                 <h1>ユーザ登録</h1>

@@ -22,8 +22,8 @@ const Login = (): JSX.Element => {
   const ExecLogin = () => {
     axios.post('http://localhost:3002/login', params)
     .then((response) => {
-      setCurrentUser({id: 0, token: response.data.token, name: name, email: response.data.user.email})
-      localStorage.setItem('current_user',JSON.stringify({id: 0, token: response.data.token, name: name}))
+      setCurrentUser({id: response.data.user_id, token: response.data.token, name: name, email: response.data.user.email})
+      localStorage.setItem('current_user',JSON.stringify({user_id: response.data.user_id, token: response.data.token, name: name}))
       router.push({
         pathname: '/',
         query: { after_login: 'true' }})
