@@ -10,7 +10,7 @@ type Props = {
   title?: string
 }
 
-const Layout = ({ children, title = 'This is the default title' }: Props) => {
+const Layout = ({ children, title = 'This is the default title' }: Props): JSX.Element => {
   const [currentUser, setCurrentUser] = useState<CurrentUser>({id: 0, token: "", name: "", email: ""});
 
   useEffect(() => {
@@ -37,6 +37,11 @@ const Layout = ({ children, title = 'This is the default title' }: Props) => {
           <Link href="/my_page">
             <a className="navbar-item">My Page</a>
           </Link>{' '}
+          {' '}
+          <Link href="/search/movies">
+            <a className="navbar-item">Search</a>
+          </Link>{' '}
+          {' '}
 
           <div className="navbar-end">
             <div className="navbar-item">
