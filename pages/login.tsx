@@ -22,7 +22,6 @@ const Login = (): JSX.Element => {
   const ExecLogin = () => {
     axios.post('http://localhost:3002/login', params)
     .then((response) => {
-      console.log(response.data)
       setCurrentUser({id: response.data.user_id, token: response.data.token, name: name, email: response.data.user.email})
       localStorage.setItem('current_user',JSON.stringify({user_id: response.data.user_id, token: response.data.token, name: name}))
       router.push({

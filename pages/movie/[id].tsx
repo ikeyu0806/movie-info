@@ -2,7 +2,6 @@ import Layout from '../../components/Layout'
 import React, { useState, useEffect } from "react"
 import axios from 'axios'
 import { Review } from '../../interfaces/Review'
-
 import { Movie } from '../../interfaces/Movie'
 import { useRouter } from 'next/router'
 
@@ -23,6 +22,7 @@ const MovieDetail = (): JSX.Element => {
   const [isPostReview, setIsPostReview] = useState<boolean>(false)
   const [reviews, setReviews] = useState<Review[]>([])
   const [login, setLogin] = useState<boolean>(false)
+  const [userID, setUserID] = useState<number | null>(null)
 
   useEffect(() => {
     async function fetchMovie() {
@@ -47,8 +47,11 @@ const MovieDetail = (): JSX.Element => {
       setReviews(Reviews.data)
     }
     fetchReviews();
-    window.location.search.match(/review=success/) && setIsPostReview(true)
-    localStorage.getItem("current_user") != null && setLogin(true)
+    const current_user = JSON.parse(localStorage.getItem("current_user")  || '{}')
+    const current_user_id = current_user.user_id
+    setUserID(current_user_id)
+    window.location.search.match(/review=success/) && setIsPostReview(true);
+    localStorage.getItem("current_user") != null && setLogin(true);
   }, []);
 
   const showModal = () => { 
@@ -66,6 +69,7 @@ const MovieDetail = (): JSX.Element => {
     public_id: Math.floor( Math.random() * (999999)),
     comment: comment,
     score: score,
+    user_id: userID
   }
 
   const submitReview = () => {

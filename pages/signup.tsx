@@ -22,6 +22,7 @@ const SignUp = (): JSX.Element => {
   }
 
   const router = useRouter();
+  const [invalidFlash, setInvalidFlash] = useState<boolean>(false)
 
   const ExecSignUp = () => {
     axios.post('http://localhost:3002/signup', params)
@@ -35,6 +36,7 @@ const SignUp = (): JSX.Element => {
     })
     .catch((error) => {
       console.log(error)
+      setInvalidFlash(true)
     })
   }
 
@@ -55,6 +57,10 @@ const SignUp = (): JSX.Element => {
           </>
         :
           <>
+            {invalidFlash && <div className="notification is-danger">
+              <button className="delete" onClick={() => setInvalidFlash(false)}></button>
+                入力された情報に誤りがあります。
+              </div>}
             <div className="authentication-form">
               <div className="field">
                 <h1>ユーザ登録</h1>
