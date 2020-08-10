@@ -115,16 +115,16 @@ const MovieDetail = (): JSX.Element => {
               <div className="review-contents">
                 {console.log(reviews)}
                 {reviews.map((review: Review, i: number) => (
-                  <div key={i}>
+                  <div key={i} className="box">
                     <div className="columns reviewed-stars">
                       <div className={(review.score >= 1) ? "yellow-star" : "silver-star"}>★</div>
                       <div className={(review.score >= 2) ? "yellow-star" : "silver-star"}>★</div>
                       <div className={(review.score >= 3) ? "yellow-star" : "silver-star"}>★</div>
                       <div className={(review.score >= 4) ? "yellow-star" : "silver-star"}>★</div>
                       <div className={(review.score >= 5) ? "yellow-star" : "silver-star"}>★</div>
-                      <p className="review-user">{review.User && review.User.name + "さん"}</p>
+                      <span className="tag is-warning review-user">{review.User && review.User.name + "さん"}</span>
                     </div>
-                    <p className="review-comment">{review.comment}</p>
+                    <article className="media review-comment">{review.comment}</article>
                   </div>
                 ))}
               </div>
