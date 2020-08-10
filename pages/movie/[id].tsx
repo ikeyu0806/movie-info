@@ -113,6 +113,7 @@ const MovieDetail = (): JSX.Element => {
             <div className="reviews">
               <div className="review-list"><span className="tag is-light is-large">レビュー一覧</span></div>
               <div className="review-contents">
+                {console.log(reviews)}
                 {reviews.map((review: Review, i: number) => (
                   <div key={i}>
                     <div className="columns reviewed-stars">
@@ -121,6 +122,7 @@ const MovieDetail = (): JSX.Element => {
                       <div className={(review.score >= 3) ? "yellow-star" : "silver-star"}>★</div>
                       <div className={(review.score >= 4) ? "yellow-star" : "silver-star"}>★</div>
                       <div className={(review.score >= 5) ? "yellow-star" : "silver-star"}>★</div>
+                      <p className="review-user">{review.User && review.User.name + "さん"}</p>
                     </div>
                     <p className="review-comment">{review.comment}</p>
                   </div>
@@ -219,6 +221,9 @@ const MovieDetail = (): JSX.Element => {
           position: relative;
           font-size: 15px;
           letter-spacing : 0px;
+        }
+        .review-user {
+          margin-left: 10px;
         }
       `}</style>
     </Layout>
