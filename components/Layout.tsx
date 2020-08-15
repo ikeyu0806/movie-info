@@ -11,7 +11,8 @@ type Props = {
 }
 
 const Layout = ({ children, title = 'This is the default title' }: Props): JSX.Element => {
-  const [currentUser, setCurrentUser] = useState<CurrentUser>({id: 0, token: "", name: "", email: ""});
+  const [currentUser, setCurrentUser] = useState<CurrentUser>({id: 0, token: "", name: "", email: ""})
+  const [isActive, setIsActive] = useState<boolean>(false)
 
   useEffect(() => {
     const currentUserInfo = localStorage.getItem('current_user');
@@ -30,33 +31,45 @@ const Layout = ({ children, title = 'This is the default title' }: Props): JSX.E
       </Head>
       <header>
         <nav className="navbar is-warning" role="navigation" aria-label="main navigation">
-          <Link href="/">
-            <a className="navbar-item">Top</a>
-          </Link>{' '}
-          {' '}
-          <Link href="/my_page">
-            <a className="navbar-item">My Page</a>
-          </Link>{' '}
-          {' '}
-          <Link href="/search/movies">
-            <a className="navbar-item">Search</a>
-          </Link>{' '}
-          {' '}
+          <a role="button"
+             className="navbar-burger burger"
+             aria-label="menu"
+             aria-expanded="false"
+             data-target="navbarLinks"
+             onClick={() => {setIsActive(!isActive);console.log}}>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+          <div id="navbarLinks" className={isActive ? "navbar-menu is-active" : "navbar-menu"}>
+            <Link href="/">
+              <a className="navbar-item">Top</a>
+            </Link>{' '}
+            {' '}
+            <Link href="/my_page">
+              <a className="navbar-item">My Page</a>
+            </Link>{' '}
+            {' '}
+            <Link href="/search/movies">
+              <a className="navbar-item">Search</a>
+            </Link>{' '}
+            {' '}
 
-          <div className="navbar-end">
-            <div className="navbar-item">
-              {currentUser.name || loginUser.name
-                ? <span className="tag is-primary">{currentUser.name ? currentUser.name : loginUser.name}でログイン中です</span>
-                :              
-                <div className="buttons">
-                  <a className="button is-primary" href="/signup">
-                    <strong>ユーザ登録</strong>
-                  </a>
-                  <a className="button is-light" href="/login">
-                  <strong>ログイン</strong>
-                  </a>
-                </div>
-              }
+            <div className="navbar-end">
+              <div className="navbar-item">
+                {currentUser.name || loginUser.name
+                  ? <span className="tag is-primary">{currentUser.name ? currentUser.name : loginUser.name}でログイン中です</span>
+                  :              
+                  <div className="buttons">
+                    <a className="button is-primary" href="/signup">
+                      <strong>ユーザ登録</strong>
+                    </a>
+                    <a className="button is-light" href="/login">
+                    <strong>ログイン</strong>
+                    </a>
+                  </div>
+                }
+              </div>
             </div>
           </div>
         </nav>
