@@ -34,6 +34,14 @@ const Showing = (): JSX.Element => {
       ))}
     </div>
     <style jsx>{`
+      .poster-img {
+        transition-duration: 0.5s;
+      }
+      .poster-img:hover{
+        box-shadow: 10px 10px 10px rgba(0,0,0,0.5);
+        transform: translateY(-20px);
+        transition-duration: 0.5s;
+      }
       @media screen and (max-width: 768px) {
         .column {
           text-align: center;
