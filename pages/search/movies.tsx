@@ -63,18 +63,25 @@ const SearchMoviesPage = (): JSX.Element => {
       </table>
     </Layout>
     <style jsx>{`
-      .search-field {
-        margin-top: 20px;
-        margin-left: 400px;
-        margin-right: 400px;
+      @media screen and (min-width: 768px) {
+        .search-field {
+          margin-top: 20px;
+          margin-left: 400px;
+          margin-right: 400px;
+        }
+        .table {
+          margin-left: auto;
+          margin-right: auto;
+        }
+        .poster {
+          width: 100px;
+          height: 120px;
+        }
       }
-      .table {
-        margin-left: auto;
-        margin-right: auto;
-      }
-      .poster {
-        width: 100px;
-        height: 120px;
+      @media screen and (max-width: 768px) {
+        .search-field {
+          margin: 10px;
+        }
       }
     `}</style>
     </>

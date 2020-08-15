@@ -1,10 +1,10 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import Trend from '../components/Trend'
+import Showing from '../components/Showing'
 
-describe('Trend component', () => {
+describe('Showing component', () => {
   test('should render columns', () => {
-    const wrapper = shallow(<Trend />);
+    const wrapper = shallow(<Showing />);
     expect(wrapper.find('.columns').length).toBe(1);
   });
 });

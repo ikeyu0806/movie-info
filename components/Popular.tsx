@@ -6,25 +6,26 @@ import axios from 'axios'
 import { MoviePoster } from '../interfaces/MoviePoster'
 
 const Popular = (): JSX.Element => {
-  const [trendMovies, setTrendMovies] = useState<MoviePoster[]>([]);
+  const [trendMovies, setShowingMovies] = useState<MoviePoster[]>([]);
 
   useEffect(() => {
     async function fetchMovies() {
       const trendMovies = await axios.get(
         'https://api.themoviedb.org/3/movie/popular?api_key=' + process.env.tmdbApi + '&language=ja&page=1',
       );
-      setTrendMovies(trendMovies.data.results);
+      setShowingMovies(trendMovies.data.results);
     }
     fetchMovies();
   }, []);
 
   return (
+    <>
     <div className="columns is-vcentered">
       {trendMovies.slice(1, 9).map((movie, i) => (
         <div key={i}>
           <div className="column">
             <Link href={`/Movie/${movie.id}`}>
-              <img src={"https://image.tmdb.org/t/p/w500/" + movie.poster_path}></img>
+              <img src={"https://image.tmdb.org/t/p/w500/" + movie.poster_path} className="poster-img"></img>
             </Link>
             <div>{movie.title}</div>
           </div>
@@ -32,6 +33,26 @@ const Popular = (): JSX.Element => {
         </div>
       ))}
     </div>
+    <style jsx>{`
+      .poster-img {
+        transition-duration: 0.5s;
+      }
+      .poster-img:hover{
+        box-shadow: 10px 10px 10px rgba(0,0,0,0.5);
+        transform: translateY(-20px);
+        transition-duration: 0.5s;
+      }
+      @media screen and (max-width: 768px) {
+        .column {
+          text-align: center;
+        }
+        .poster-img {
+          width: 80%;
+          height: 80%
+        }
+      }
+    `}</style>
+    </>
   )
 }
 
