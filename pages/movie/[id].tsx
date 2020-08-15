@@ -23,6 +23,7 @@ const MovieDetail = (): JSX.Element => {
   const [reviews, setReviews] = useState<Review[]>([])
   const [login, setLogin] = useState<boolean>(false)
   const [userID, setUserID] = useState<number | null>(null)
+  const [isSmartPhone, setIsSmartPhone] = useState<boolean>(false)
 
   useEffect(() => {
     async function fetchMovie() {
@@ -52,6 +53,7 @@ const MovieDetail = (): JSX.Element => {
     setUserID(current_user_id)
     window.location.search.match(/review=success/) && setIsPostReview(true);
     localStorage.getItem("current_user") != null && setLogin(true);
+    setIsSmartPhone(navigator.userAgent.match(/iPhone|Android.+Mobile/) !== null)
   }, []);
 
   const showModal = () => { 
@@ -93,9 +95,9 @@ const MovieDetail = (): JSX.Element => {
         <button className="delete" onClick={() => setIsPostReview(false)}></button>
         レビューを投稿しました。
       </div>}
-      <div id="movie-detail" className="columns is-mobile">
+      <div id="movie-detail" className={isSmartPhone ? "" : "columns is-mobile"}>
           <div className="column">
-            <img src={"https://image.tmdb.org/t/p/w500/" + movie.poster_path}></img>
+            <img src={"https://image.tmdb.org/t/p/w500/" + movie.poster_path} className="poster-img"></img>
           </div>
           <div className="column movie-text-info">
             <h1>{movie.title}</h1>
@@ -224,6 +226,12 @@ const MovieDetail = (): JSX.Element => {
         }
         .review-user {
           margin-left: 10px;
+        }
+        @media screen and (max-width: 768px) {
+          .poster-img {
+            width: 80%;
+            height: 80%;
+          }
         }
       `}</style>
     </Layout>
