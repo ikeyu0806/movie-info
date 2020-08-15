@@ -19,12 +19,13 @@ const Popular = (): JSX.Element => {
   }, []);
 
   return (
+    <>
     <div className="columns is-vcentered">
       {trendMovies.slice(1, 9).map((movie, i) => (
         <div key={i}>
           <div className="column">
             <Link href={`/Movie/${movie.id}`}>
-              <img src={"https://image.tmdb.org/t/p/w500/" + movie.poster_path}></img>
+              <img src={"https://image.tmdb.org/t/p/w500/" + movie.poster_path} className="poster-img"></img>
             </Link>
             <div>{movie.title}</div>
           </div>
@@ -32,6 +33,18 @@ const Popular = (): JSX.Element => {
         </div>
       ))}
     </div>
+    <style jsx>{`
+      @media screen and (max-width: 768px) {
+        .column {
+          text-align: center;
+        }
+        .poster-img {
+          width: 80%;
+          height: 80%
+        }
+      }
+    `}</style>
+    </>
   )
 }
 
