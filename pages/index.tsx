@@ -1,5 +1,5 @@
 import Layout from '../components/Layout'
-import Trend from '../components/Trend'
+import Showing from '../components/Showing'
 import Popular from '../components/Popular'
 import React, { useState, useEffect } from "react"
 
@@ -31,7 +31,7 @@ const IndexPage = (): JSX.Element => {
           font-weight: bold;
         }
       `}</style>
-      <Trend />
+      <Showing />
       <h1>人気の映画</h1>
       <Popular />
     </Layout>

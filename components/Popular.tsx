@@ -6,14 +6,14 @@ import axios from 'axios'
 import { MoviePoster } from '../interfaces/MoviePoster'
 
 const Popular = (): JSX.Element => {
-  const [trendMovies, setTrendMovies] = useState<MoviePoster[]>([]);
+  const [trendMovies, setShowingMovies] = useState<MoviePoster[]>([]);
 
   useEffect(() => {
     async function fetchMovies() {
       const trendMovies = await axios.get(
         'https://api.themoviedb.org/3/movie/popular?api_key=' + process.env.tmdbApi + '&language=ja&page=1',
       );
-      setTrendMovies(trendMovies.data.results);
+      setShowingMovies(trendMovies.data.results);
     }
     fetchMovies();
   }, []);
