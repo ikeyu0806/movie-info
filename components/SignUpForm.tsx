@@ -2,6 +2,7 @@ import * as React from 'react'
 import axios from 'axios'
 import { useState, createContext } from "react"
 import Layout from '../components/Layout'
+import SubmitButton from '../components/SubmitButton'
 import { User, CurrentUser } from '../interfaces/User'
 import { useRouter } from 'next/router'
 
@@ -127,11 +128,11 @@ const SignUpForm = (): JSX.Element => {
               </div>
 
               <div className="field is-grouped confirm-buttons">
-                <div className="control">
-                  <button className="button is-link"
-                          onClick={ExecSignUp}
-                          disabled={!name || !email || !password1 || !password2 || !consent || password1 !== password2}>送信</button>
-                </div>
+                <SubmitButton 
+                  onClick={ExecSignUp}
+                  disabled={!name || !email || !password1 || !password2 || !consent || password1 !== password2}
+                >
+                </SubmitButton>
                 <div className="control">
                   <button className="button is-link is-light">キャンセル</button>
                 </div>
