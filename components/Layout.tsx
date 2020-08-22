@@ -1,6 +1,5 @@
 import React, { ReactNode } from 'react'
-import { useEffect, useState, useContext } from "react"
-import { CurrentUserContext } from '../pages/signup'
+import { useEffect, useState } from "react"
 import { CurrentUser } from '../interfaces/User'
 import Link from 'next/link'
 import Head from 'next/head'
@@ -20,7 +19,7 @@ const Layout = ({ children, title = 'This is the default title' }: Props): JSX.E
       setCurrentUser(JSON.parse(currentUserInfo));
     }
   }, []);
-  const loginUser = useContext(CurrentUserContext);
+
   return (
     <>
       <Head>
@@ -57,8 +56,8 @@ const Layout = ({ children, title = 'This is the default title' }: Props): JSX.E
 
             <div className="navbar-end">
               <div className="navbar-item">
-                {currentUser.name || loginUser.name
-                  ? <span className="tag is-primary">{currentUser.name ? currentUser.name : loginUser.name}でログイン中です</span>
+                {currentUser.name
+                  ? <span className="tag is-primary">{currentUser.name && currentUser.name + "でログイン中です"}</span>
                   :              
                   <div className="buttons">
                     <a className="button is-primary" href="/signup">
