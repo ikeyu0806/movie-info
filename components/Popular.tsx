@@ -1,12 +1,11 @@
 import * as React from 'react'
 import { useState, useEffect } from "react"
-import Link from 'next/link'
 import axios from 'axios'
-
-import { MoviePoster } from '../interfaces/MoviePoster'
+import { MoviePoster as MoviePosterType } from '../interfaces/MoviePoster'
+import MoviePoster from '../components/MoviePoster'
 
 const Popular = (): JSX.Element => {
-  const [trendMovies, setShowingMovies] = useState<MoviePoster[]>([]);
+  const [trendMovies, setShowingMovies] = useState<MoviePosterType[]>([]);
 
   useEffect(() => {
     async function fetchMovies() {
@@ -23,12 +22,7 @@ const Popular = (): JSX.Element => {
     <div className="columns is-vcentered">
       {trendMovies.slice(1, 9).map((movie, i) => (
         <div key={i}>
-          <div className="column">
-            <Link href={`/Movie/${movie.id}`}>
-              <img src={"https://image.tmdb.org/t/p/w500/" + movie.poster_path} className="poster-img"></img>
-            </Link>
-            <div>{movie.title}</div>
-          </div>
+          <MoviePoster movie={movie}></MoviePoster>
           <br/>
         </div>
       ))}
