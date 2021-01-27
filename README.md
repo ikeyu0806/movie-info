@@ -15,6 +15,10 @@ https://www.themoviedb.org/?language=ja
 ### test
 `yarn test test/Layout.test.tsx`
 
+### Deploy
+Vercelでデプロイしています。
+https://movie-info-frontend.vercel.app/
+
 ## Author
 Yuki Ikegaya
 
