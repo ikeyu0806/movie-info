@@ -1,21 +1,32 @@
 import React, { useState, useEffect } from "react"
+import axios from 'axios'
 import Showing from './Showing'
 import Popular from './Popular'
 import Layout from '../components/Layout'
 
-
-
 const Home = (): JSX.Element => {
   const [loginFlash, setLoginFlash] = useState<boolean>(false)
   const [logoutFlash, setLogoutFlash] = useState<boolean>(false)
+  const [isServerRunning, setIsServerRunning] = useState<boolean>(false)
 
   useEffect(() => {
     window.location.search.match(/after_login=true/) && setLoginFlash(true)
     window.location.search.match(/after_logout=true/) && setLogoutFlash(true)
+    axios.get('http://localhost:3002/review/1')
+    .then(() => {
+      setIsServerRunning(true)
+    })
+    .catch((error) => {
+      console.log(error)
+      setIsServerRunning(false)
+    })
   }, []);
 
   return (
     <Layout title="映画情報サービス">
+    {!isServerRunning && <div className="notification is-danger">
+      現在バックエンドAPIサーバが稼働していないため、ログイン、レビュー機能などが使えません。
+    </div>}
     {loginFlash && <div className="notification is-primary">
       <button className="delete" onClick={() => setLoginFlash(false)}></button>
       ログインしました。
