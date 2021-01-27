@@ -6,6 +6,8 @@ services:
       dockerfile: Dockerfile
     volumes:
      - ./:/workspace/movie-info-frontend
+    environment:
+      - tmdbApi
     command: "yarn run dev"
     ports:
      - "3001:3000"
