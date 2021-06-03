@@ -79,9 +79,10 @@ const MovieDetail = (): JSX.Element => {
     .then((response) => {
       console.log(response)
       router.push({
-        pathname: '/Movie/' + movie.id,
+        pathname: '/movie/' + movie.id,
         query: { review: 'success' }
-     })
+      })
+      location.reload()
     })
     .catch((error) => {
       console.log(error)
