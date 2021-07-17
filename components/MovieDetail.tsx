@@ -43,7 +43,7 @@ const MovieDetail = (): JSX.Element => {
     fetchMovie();
     async function fetchReviews() {
       const Reviews = await axios.get(
-        'http://localhost:3002/review/' + window.location.pathname.split('/')[2]
+        `${process.env.BACKEND_URL}/review/` + window.location.pathname.split('/')[2]
       );
       setReviews(Reviews.data)
     }
@@ -75,7 +75,7 @@ const MovieDetail = (): JSX.Element => {
   }
 
   const submitReview = () => {
-    axios.post('http://localhost:3002/review/create', params)
+    axios.post(`${process.env.BACKEND_URL}/review/create`, params)
     .then((response) => {
       console.log(response)
       router.push({

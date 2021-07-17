@@ -12,7 +12,7 @@ const Home = (): JSX.Element => {
   useEffect(() => {
     window.location.search.match(/after_login=true/) && setLoginFlash(true)
     window.location.search.match(/after_logout=true/) && setLogoutFlash(true)
-    axios.get('http://localhost:3002/is_running')
+    axios.get(process.env.BACKEND_URL + '/is_running')
     .then(() => {
       setIsServerRunning(true)
     })

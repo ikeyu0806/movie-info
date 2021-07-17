@@ -21,7 +21,7 @@ const LoginForm = (): JSX.Element => {
   const [invalidFlash, setInvalidFlash] = useState<boolean>(false)
 
   const ExecLogin = () => {
-    axios.post('http://localhost:3002/login', params)
+    axios.post(`${process.env.BACKEND_URL}/login`, params)
     .then((response) => {
       setCurrentUser({id: response.data.user_id, token: response.data.token, name: name, email: response.data.user.email})
       localStorage.setItem('current_user',JSON.stringify({user_id: response.data.user_id, token: response.data.token, name: name}))
