@@ -7,7 +7,7 @@ import Layout from '../components/Layout'
 const Home = (): JSX.Element => {
   const [loginFlash, setLoginFlash] = useState<boolean>(false)
   const [logoutFlash, setLogoutFlash] = useState<boolean>(false)
-  const [isServerRunning, setIsServerRunning] = useState<boolean>(false)
+  const [isServerRunning, setIsServerRunning] = useState<boolean>(true)
 
   useEffect(() => {
     window.location.search.match(/after_login=true/) && setLoginFlash(true)
