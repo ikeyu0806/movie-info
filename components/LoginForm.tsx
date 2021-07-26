@@ -51,48 +51,50 @@ const LoginForm = (): JSX.Element => {
       </>
       :
       <>
-        {invalidFlash && <div className="notification is-danger">
-          <button className="delete" onClick={() => setInvalidFlash(false)}></button>
-          入力された情報に誤りがあります。
-        </div>}
-        <div className="authentication-form">
-          <div className="field">
-            <h1>ログイン</h1>
-          </div>
-          <div className="field">
-            <label className="label">ユーザ名</label>
-            <div className="control has-icons-left has-icons-right">
-              <input className="input" type="text" placeholder="ユーザ名" onChange={(e) => { setName(e.target.value)}} value={name}></input>
-              <span className="icon is-small is-left">
-                <i className="fas fa-user"></i>
-              </span>
-              <span className="icon is-small is-right">
-                <i className="fas fa-check"></i>
-              </span>
+        <div className="container has-text-centered">
+          <div className="column is-4 is-offset-4">
+          {invalidFlash && <div className="notification is-danger">
+            <button className="delete" onClick={() => setInvalidFlash(false)}></button>
+            入力された情報に誤りがあります。
+          </div>}
+            <div className="field">
+              <h1>ログイン</h1>
             </div>
-          </div>
-
-          <div className="field">
-            <label className="label">パスワード</label>
-            <div className="control has-icons-left has-icons-right">
-              <input className="input" type="password1" placeholder="パスワード" onChange={(e) => { setPassword1(e.target.value)}} value={password1}></input>
-              <span className="icon is-small is-left">
-                <i className="fas fa-envelope"></i>
-              </span>
-              <span className="icon is-small is-right">
-                <i className="fas fa-exclamation-triangle"></i>
-              </span>
+            <div className="field">
+              <label className="label">ユーザ名</label>
+              <div className="control has-icons-left has-icons-right">
+                <input className="input" type="text" placeholder="ユーザ名" onChange={(e) => { setName(e.target.value)}} value={name}></input>
+                <span className="icon is-small is-left">
+                  <i className="fas fa-user"></i>
+                </span>
+                <span className="icon is-small is-right">
+                  <i className="fas fa-check"></i>
+                </span>
+              </div>
             </div>
-          </div>
 
-          <div className="field is-grouped confirm-buttons">
-            <SubmitButton 
-              onClick={ExecLogin}
-              disabled={!name ||!password1}
-            >
-            </SubmitButton>
-            <div className="control">
-              <button className="button is-link is-light">キャンセル</button>
+            <div className="field">
+              <label className="label">パスワード</label>
+              <div className="control has-icons-left has-icons-right">
+                <input className="input" type="password1" placeholder="パスワード" onChange={(e) => { setPassword1(e.target.value)}} value={password1}></input>
+                <span className="icon is-small is-left">
+                  <i className="fas fa-envelope"></i>
+                </span>
+                <span className="icon is-small is-right">
+                  <i className="fas fa-exclamation-triangle"></i>
+                </span>
+              </div>
+            </div>
+
+            <div className="columns is-centered confirm-buttons">
+              <SubmitButton 
+                onClick={ExecLogin}
+                disabled={!name ||!password1}
+              >
+              </SubmitButton>
+              <div className="control" id="cancel-button">
+                <button className="button is-link is-light">キャンセル</button>
+              </div>
             </div>
           </div>
         </div>
@@ -101,13 +103,11 @@ const LoginForm = (): JSX.Element => {
             font-size: 150%;
             font-weight: bold;
           }
-          .authentication-form {
-            margin: 0 auto;
-            padding: 40px ;
-            width: 30%;
-          }
           .confirm-buttons {
             margin-top: 20px;
+          }
+          #cancel-button {
+            margin-left: 10px;
           }
         `}</style>
       </>
