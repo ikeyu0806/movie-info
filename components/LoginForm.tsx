@@ -92,9 +92,6 @@ const LoginForm = (): JSX.Element => {
                 disabled={!name ||!password1}
               >
               </SubmitButton>
-              <div className="control" id="cancel-button">
-                <button className="button is-link is-light">キャンセル</button>
-              </div>
             </div>
           </div>
         </div>
